@@ -1,0 +1,27 @@
+﻿@* This file has been renamed with a .txt extension for viewing purposes only. *@
+
+@{  
+    <h3>Intro</h3>
+    <p>This is a sample email using razor to convert a record into a custom email</p>
+      
+    <h3>Here you can get specific records and format them accordingly:</h3>
+    
+    string name = Model.Record.GetRecordField("Name").ValuesAsString();
+	string email = Model.Record.GetRecordField("Email").ValuesAsString();
+	string message = Model.Record.GetRecordField("Message").ValuesAsString();
+    
+    <p>Name: @name</p>
+    <p>Email: @email</p>
+    <p>Message: @message</p>
+    
+    <h3>Here you can recurse the fields within the record:</h3>
+    
+    <ul>
+        @foreach (var r in Model.Record.RecordFields) {
+            <li>
+                <h4>Caption: @r.Value.Field.Caption</h4>
+                <p>@r.Value.ValuesAsString()</p>
+            </li>
+        }
+    </ul>
+}
